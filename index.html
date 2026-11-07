@@ -142,6 +142,9 @@ main{padding-top:44px}
 .course:first-child{border-top:0}
 .course b{font-weight:600;font-size:var(--s-sm)}
 .course span{font-size:var(--s-xs);color:var(--muted)}
+.course .c-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.course .cr{white-space:nowrap}
+.course .code{font-variant-numeric:tabular-nums;letter-spacing:.02em}
 
 /* contact */
 .contact{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
@@ -218,11 +221,13 @@ const SKILLS = [
   ["Building the product","Turning the plan into a working app with the team.",["share-ban","counter","squadup"]]
 ];
 
+/* Current modules: [code, name, credits, description] */
 const COURSES = [
-  ["Business Planning & Idea Generation","Market research, strategy and pitching"],
-  ["Artificial Intelligence","Language processing and machine learning"],
-  ["Software Testing & Reliability","Building software that works the way it should"],
-  ["Programming","Python and Java"]
+  ["BIE3274","Major Project 2",4,"Building SquadUp, a marketplace for gamers"],
+  ["BBE3122","Business Planning & Idea Generation",3,"Market research, strategy and pitching"],
+  ["BSE1111","Artificial Intelligence",3,"How machines search, reason and understand language"],
+  ["BSE1131","Machine Learning",3,"Training models that learn from data"],
+  ["BIE3453","Software Testing & Reliability",3,"Building software that works the way it should"]
 ];
 
 const $ = s => document.querySelector(s);
@@ -269,13 +274,21 @@ const VIEWS = {
   },
   education(){
     return `<div class="page-h"><h1>Education</h1></div>
+      <div class="prose">
+        <p>I'm in my third year of Software Engineering with Multimedia at Limkokwing University in Phnom Penh. The degree mixes programming, design and business, which is why my projects start with research and end with a pitch.</p>
+        <p>This semester I'm studying artificial intelligence, machine learning and software testing, and building SquadUp as my major project.</p>
+      </div>
       <div class="tl"><div class="tl-item">
-        <h3>Bachelor of Software Engineering with Multimedia</h3>
+        <h3>BSc (Hons) in Software Engineering with Multimedia</h3>
         <p class="where">Limkokwing University of Creative Technology · Phnom Penh, Cambodia</p>
-        <p class="label">In progress</p>
+        <p class="label">Year 3, Semester 2 · In progress</p>
       </div></div>
-      <div class="sec-h"><h2>Key courses</h2></div>
-      <div class="courses">${COURSES.map(([n,d])=>`<div class="course"><b>${esc(n)}</b><span>${esc(d)}</span></div>`).join("")}</div>`;
+      <div class="stats">
+        <div class="stat"><b>3.28</b><span>CGPA out of 4.0</span></div>
+        <div class="stat"><b>3.61</b><span>GPA, latest semester</span></div>
+      </div>
+      <div class="sec-h"><h2>Current modules</h2></div>
+      <div class="courses">${COURSES.map(([c,n,cr,d])=>`<div class="course"><div class="c-top"><b>${esc(n)}</b><span class="cr">${cr} credits</span></div><span><span class="code">${esc(c)}</span> · ${esc(d)}</span></div>`).join("")}</div>`;
   },
   contact(){
     return `<div class="page-h"><h1>Contact</h1></div>
