@@ -158,13 +158,13 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);display
 
 <div class="wrap">
   <header class="bar">
-    <a class="brand" href="#about">Rin Monyrathanak<span>.</span></a>
+    <a class="brand" href="/">Rin Monyrathanak<span>.</span></a>
     <nav class="nav" id="nav" aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
+      <a href="/">About</a>
+      <a href="/projects">Projects</a>
+      <a href="/skills">Skills</a>
+      <a href="/education">Education</a>
+      <a href="/contact">Contact</a>
     </nav>
     <div class="icons">
       <a class="ibtn" id="li" href="#" target="_blank" rel="noopener" aria-label="LinkedIn" hidden><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
@@ -231,7 +231,7 @@ const byslug = Object.fromEntries(PROJECTS.map(p => [p.slug, p]));
 const chip = p => `<span class="chip ${p.status}">${p.status==="done"?"Completed":"Preparing launch"}</span>`;
 
 function card(p){
-  return `<a class="card" href="#p-${p.slug}">
+  return `<a class="card" href="/projects/${p.slug}">
     <div class="txt"><div class="meta"><span class="label">${p.year}</span>${chip(p)}</div><h3>${esc(p.name)}</h3><p>${esc(p.blurb)}</p></div>
     <span class="go">View project →</span>
     <div class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
@@ -244,7 +244,7 @@ const VIEWS = {
       <div class="eyebrow"><span class="dot"></span><span class="label">Student · Limkokwing University, Phnom Penh</span></div>
       <h1>Rin Monyrathanak</h1>
       <p class="line">I notice everyday problems and turn them into <em>products people want to use.</em></p>
-      <div class="cta"><a class="btn primary" href="#projects">See my projects</a><a class="btn" href="#contact">Get in touch</a></div>
+      <div class="cta"><a class="btn primary" href="/projects">See my projects</a><a class="btn" href="/contact">Get in touch</a></div>
     </section>
     <dl class="now">
       <dt class="label">Studying</dt><dd>Software Engineering with Multimedia</dd>
@@ -255,7 +255,7 @@ const VIEWS = {
       <p>Cafés in Phnom Penh still hand out paper stamp cards. Gamers can't find a good teammate when they need one. People buying Netflix or Spotify online get scammed and never see their money again. Each of those problems became one of my projects.</p>
       <p>I'm a Software Engineering with Multimedia student at Limkokwing University, and I like owning an idea from start to finish. I ask real people what they need, work out a price that makes sense, design the screens, and then stand up and pitch it.</p>
     </div>
-    <div class="sec-h"><h2>Projects</h2><a href="#projects">View all →</a></div>
+    <div class="sec-h"><h2>Projects</h2><a href="/projects">View all →</a></div>
     <div class="plist">${PROJECTS.map(card).join("")}</div>`;
   },
   projects(){
@@ -265,7 +265,7 @@ const VIEWS = {
   skills(){
     return `<div class="page-h"><h1>Skills</h1></div>
       <div class="prose"><p>What I bring to a team, and where I've used it.</p></div>
-      <div class="sk-grid">${SKILLS.map(([n,d,used])=>`<div class="sk"><h3>${esc(n)}</h3><p>${esc(d)}</p><span class="used">Used in ${used.map(s=>`<a href="#p-${s}">${esc(byslug[s].name)}</a>`).join(", ")}</span></div>`).join("")}</div>`;
+      <div class="sk-grid">${SKILLS.map(([n,d,used])=>`<div class="sk"><h3>${esc(n)}</h3><p>${esc(d)}</p><span class="used">Used in ${used.map(s=>`<a href="/projects/${s}">${esc(byslug[s].name)}</a>`).join(", ")}</span></div>`).join("")}</div>`;
   },
   education(){
     return `<div class="page-h"><h1>Education</h1></div>
@@ -288,7 +288,7 @@ const VIEWS = {
 };
 
 function detail(p){
-  return `<a class="back" href="#projects">← All projects</a>
+  return `<a class="back" href="/projects">← All projects</a>
     <div class="page-h"><div class="meta"><span class="label">${p.year}</span>${chip(p)}</div>
       <h1>${esc(p.name)}</h1><p class="sub">${esc(p.blurb)}</p></div>
     <div class="facts">${p.facts.map(([k,v])=>`<div><span class="label">${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>
@@ -299,13 +299,15 @@ function detail(p){
 }
 
 function route(){
-  const h = (location.hash || "#about").slice(1);
+  const h = location.pathname.replace(/^\/+|\/+$/g, "") || "about";
   let html, active = h;
-  if (h.startsWith("p-") && byslug[h.slice(2)]) { html = detail(byslug[h.slice(2)]); active = "projects"; }
+  const m = h.match(/^projects\/(.+)$/);
+  if (m && byslug[m[1]]) { html = detail(byslug[m[1]]); active = "projects"; }
   else if (VIEWS[h]) html = VIEWS[h]();
   else { html = VIEWS.about(); active = "about"; }
   $("#main").innerHTML = `<div class="view">${html}</div>`;
-  document.querySelectorAll(".nav a").forEach(a => { if (a.getAttribute("href")==="#"+active) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  const activeHref = active === "about" ? "/" : "/" + active;
+  document.querySelectorAll(".nav a").forEach(a => { if (a.getAttribute("href")===activeHref) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
   $("#nav").classList.remove("open"); $("#menu").setAttribute("aria-expanded","false");
   const copy = $("#copy");
   if (copy) copy.addEventListener("click", async () => {
@@ -313,7 +315,12 @@ function route(){
     try { await navigator.clipboard.writeText(EMAIL); t.textContent = "Copied"; }
     catch { const r = document.createRange(); r.selectNodeContents($("#mailtext")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); t.textContent = "Selected. Press Ctrl+C to copy"; }
   });
-  if (location.hash) window.scrollTo({top:0});
+}
+
+function go(path){
+  if (path !== location.pathname) history.pushState(null, "", path);
+  route();
+  window.scrollTo({top:0});
 }
 
 if (LINKS.linkedin) { $("#li").href = LINKS.linkedin; $("#li").hidden = false; }
@@ -324,7 +331,20 @@ $("#menu").addEventListener("click", () => {
   $("#menu").setAttribute("aria-expanded", String(open));
 });
 
-window.addEventListener("hashchange", route);
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[href^='/']");
+  if (!a || a.target === "_blank" || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  go(a.getAttribute("href"));
+});
+window.addEventListener("popstate", route);
+
+// Old links like /#skills or /#p-squadup redirect to the clean URL
+const oldHash = location.hash.slice(1);
+if (oldHash) {
+  const path = oldHash.startsWith("p-") ? "/projects/" + oldHash.slice(2) : oldHash === "about" ? "/" : "/" + oldHash;
+  history.replaceState(null, "", path);
+}
 route();
 </script>
 </body>
