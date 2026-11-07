@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Rin Monyrathanak, Software Engineering with Multimedia student in Phnom Penh. Projects: SquadUp, COUNTER and Share Ban.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='16' text-anchor='middle' fill='%234FD18B'%3ERM%3C/text%3E%3C/svg%3E">
+<title>Rin Monyrathanak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one 760px reading column, multi-view (About / Projects / Skills / Education / Contact), hash-routed; small uppercase labels carry the structure */
+:root{
+  --bg:#000000; --surface:#0E0E0E; --ink:#F2F2F2; --muted:#9A9A9A; --line:#242424; --accent:#4FD18B; --accent-soft:#10241A; --ok:#4FD18B; --ok-soft:#10241A; color-scheme:dark;
+  --f-display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --s-xs:.75rem; --s-sm:.875rem; --s-md:1rem; --s-lg:1.25rem; --s-xl:1.75rem; --s-2xl:2.5rem; --s-hero:clamp(2.6rem,9vw,4.75rem);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--s-md);line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:760px;margin:0 auto;padding-block:20px 56px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.02em}
+p{margin:0}
+.label{font-size:var(--s-xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:12px;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:12px;padding:8px 10px 8px 14px}
+.brand{font-family:var(--f-display);font-weight:700;text-decoration:none;font-size:var(--s-md);white-space:nowrap}
+.brand span{color:var(--accent)}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{text-decoration:none;font-size:var(--s-sm);color:var(--muted);padding:6px 10px;border-radius:8px;font-weight:500}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--ink);background:var(--bg)}
+.icons{display:flex;gap:4px}
+.ibtn{display:grid;place-items:center;width:34px;height:34px;border:0;background:transparent;color:var(--ink);border-radius:8px;cursor:pointer;text-decoration:none}
+.ibtn:hover{background:var(--bg)}
+.ibtn svg{width:18px;height:18px}
+.menu-btn{display:none}
+@media (max-width:620px){
+  .menu-btn{display:grid}
+  .nav{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px}
+  .nav.open{display:flex}
+  .nav a{padding:10px 12px}
+  .icons{margin-left:auto}
+}
+
+/* views */
+main{padding-top:44px}
+.view{display:grid;gap:28px}
+@media (prefers-reduced-motion:no-preference){.view{animation:rise .35s ease both}}
+@keyframes rise{from{transform:translateY(6px)}to{transform:none}}
+.page-h{display:grid;gap:6px}
+.page-h h1{font-size:var(--s-2xl);font-weight:700}
+.page-h .sub{font-family:var(--f-display);font-size:var(--s-xl);font-weight:600;color:var(--muted);line-height:1.2}
+.prose{display:grid;gap:16px;max-width:65ch}
+.prose p{color:color-mix(in srgb,var(--ink) 86%,var(--muted))}
+
+/* hero */
+.hero{display:grid;gap:18px}
+.eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px var(--ok-soft)}
+.hero h1{font-size:var(--s-hero);font-weight:700;line-height:.95;letter-spacing:-.035em}
+.hero .line{font-family:var(--f-display);font-size:clamp(1.25rem,3.6vw,1.6rem);font-weight:500;line-height:1.3;max-width:30ch}
+.hero .line em{font-style:normal;color:var(--accent)}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 var(--s-sm)/1 var(--f-body);text-decoration:none;padding:11px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:hover{border-color:var(--ink)}
+
+.now{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:14px;margin:0}
+.now dt{padding-top:2px}
+.now dd{margin:0;font-size:var(--s-sm);min-width:0}
+
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec-h h2{font-size:var(--s-lg);font-weight:700}
+.sec-h a{font-size:var(--s-sm);color:var(--accent);text-decoration:none;font-weight:500}
+.sec-h a:hover{text-decoration:underline}
+
+/* project cards */
+.plist{display:grid;gap:12px}
+.card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:start;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--ink)}
+@media (prefers-reduced-motion:no-preference){.card:hover{transform:translateY(-2px)}}
+.card .txt{display:grid;gap:6px;min-width:0}
+.card h3{font-size:1.2rem;font-weight:700}
+.card p{font-size:var(--s-sm);color:var(--muted);line-height:1.55;max-width:58ch}
+.card .go{color:var(--accent);font-weight:600;font-size:var(--s-sm);white-space:nowrap;padding-top:4px}
+.card .tags{grid-column:1/-1;padding-top:4px}
+@media (max-width:480px){.card{grid-template-columns:1fr}.card .go{padding-top:0}}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.75rem;padding:3px 9px;border-radius:99px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.chip{font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:99px;white-space:nowrap;letter-spacing:.02em}
+.chip.done{background:var(--ok-soft);color:var(--ok)}
+.chip.soon{background:var(--accent-soft);color:var(--accent)}
+.meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* project detail */
+.back{font-size:var(--s-sm);color:var(--muted);text-decoration:none;width:max-content}
+.back:hover{color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media (max-width:560px){.facts{grid-template-columns:1fr}}
+.facts div{background:var(--surface);padding:12px 14px;display:grid;gap:2px;min-width:0}
+.facts b{font-weight:600;font-size:var(--s-sm)}
+.points{margin:0;padding:0;list-style:none;display:grid;gap:10px;max-width:65ch}
+.points li{display:grid;grid-template-columns:18px 1fr;gap:8px}
+.points li::before{content:"→";color:var(--accent)}
+.stats{display:flex;flex-wrap:wrap;gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:grid;gap:2px;min-width:0}
+.stat b{font-family:var(--f-display);font-size:var(--s-xl);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:var(--s-xs);color:var(--muted)}
+
+/* skills */
+.sk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:560px){.sk-grid{grid-template-columns:1fr}}
+.sk{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:6px;min-width:0;align-content:start}
+.sk h3{font-size:1.05rem;font-weight:700}
+.sk p{font-size:var(--s-sm);color:var(--muted);line-height:1.55}
+.sk .used{font-size:var(--s-xs);color:var(--muted)}
+.sk .used a{color:var(--accent);text-decoration:none;font-weight:500}
+.sk .used a:hover{text-decoration:underline}
+
+/* education */
+.tl{position:relative;display:grid;gap:22px;padding-left:28px}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.tl-item{position:relative;display:grid;gap:6px}
+.tl-item::before{content:"";position:absolute;left:-28px;top:5px;width:15px;height:15px;border-radius:4px;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+.tl-item h3{font-size:1.08rem;font-weight:700}
+.tl-item .where{font-size:var(--s-sm);color:var(--muted)}
+.courses{display:grid;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.course{display:grid;gap:2px;padding:12px 14px;border-top:1px solid var(--line)}
+.course:first-child{border-top:0}
+.course b{font-weight:600;font-size:var(--s-sm)}
+.course span{font-size:var(--s-xs);color:var(--muted)}
+
+/* contact */
+.contact{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.contact h2{font-size:var(--s-xl);font-weight:700}
+.contact p{color:var(--muted);max-width:60ch}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.mail code{font-family:var(--f-body);font-size:var(--s-sm);font-weight:500;background:var(--bg);border:1px solid var(--line);padding:9px 12px;border-radius:8px;user-select:all;word-break:break-all}
+.toast{font-size:var(--s-xs);color:var(--ok)}
+
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;color:var(--muted);font-size:var(--s-xs)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="brand" href="#about">Rin Monyrathanak<span>.</span></a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="icons">
+      <a class="ibtn" id="li" href="#" target="_blank" rel="noopener" aria-label="LinkedIn" hidden><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg></a>
+      <button class="ibtn menu-btn" id="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <footer>
+    <span>© 2026 Rin Monyrathanak</span>
+    <span>Phnom Penh, Cambodia</span>
+  </footer>
+</div>
+
+<script>
+/* Add your LinkedIn URL here to show the icon in the top bar */
+const LINKS = { linkedin: "" };
+const EMAIL = "rathanakmony85@gmail.com";
+
+const PROJECTS = [
+  { slug:"squadup", name:"SquadUp", year:"2026", status:"done",
+    blurb:"A marketplace where gamers book skilled players for coaching or ranked games.",
+    tags:["Marketplace","Gaming","Product design"],
+    facts:[["Project","Major Project 2"],["Status","Completed"]],
+    body:"SquadUp connects players who want to improve with skilled players, called Pals, who coach them or join their ranked games. I shaped the idea, tested it with real gamers through a survey, designed the home page, and worked out how the business makes money.",
+    points:["Ran a customer survey to check whether gamers would pay for this, and turned the results into a report.","Set the revenue model: the platform keeps 20% of each booking and the Pal keeps 80%.","Created Squad Coin, the in-app currency, at $10 for 900 coins, with payments through ABA PayWay.","Presented a 10-minute pitch with a live demo, then answered 20 minutes of questions from the judges."],
+    stats:[["80 / 20","Pal / platform split"],["900","Squad Coins per $10"]] },
+  { slug:"counter", name:"COUNTER", year:"2026", status:"done",
+    blurb:"Your Digital Counter. Loyalty stamps and digital menus on Telegram for small food and drink shops in Phnom Penh.",
+    tags:["Small business","Telegram","Market research"],
+    facts:[["Team","Group of four"],["My role","Tech & Programming"]],
+    body:"Many cafés and milk tea shops in Phnom Penh still use paper punch cards, and a full POS system costs $500 to $1,500. COUNTER gives them a digital menu and loyalty stamps inside Telegram, with no hardware and no commission, for a simple monthly fee.",
+    points:["Set up in five minutes with a $3 QR stand on the shop counter.","Priced at $15 to $25 per shop per month, starting in BKK1, Toul Tom Poung and Toul Kork.","Tested with 13 shop owners and 20 customers.","Studied the market with Porter's Five Forces, SWOT and TOWS. Final decision: go."],
+    stats:[["92.3%","of shop owners liked the idea"],["84.6%","would pay monthly"],["2","clients to break even"]] },
+  { slug:"share-ban", name:"Share Ban", year:"2026", status:"done",
+    blurb:"A mobile marketplace for buying and selling subscriptions like Netflix, Spotify and Xbox Game Pass, with buyer protection built in.",
+    tags:["Marketplace","Mobile app","UI/UX design"],
+    facts:[["Project","Major Project 1"],["My role","UI/UX design & mobile app"],["Platforms","iPhone & Android"]],
+    body:"Buying subscription keys from strangers online is risky. Keys don't work, sellers disappear, and there's no one to complain to. Share Ban fixes that. The buyer's money is held for 48 hours, and the seller only gets paid once the key works. Every seller verifies their identity before listing, and if something goes wrong, the admin team reviews the case and refunds the buyer.",
+    points:["Designed the app's screens and the journey for buyers and sellers, and helped build the mobile app.","Built for iPhone and Android, plus an admin website for approving sellers, settling disputes and tracking sales.","Accepts card payments worldwide and ABA Pay in Cambodia, with prices in USD or riel.","Starts with 20 popular subscriptions across streaming, gaming, AI tools and music.","Next steps: launching on the App Store and Google Play, adding Khmer, and lower fees for premium sellers."],
+    stats:[["10%","fee per sale"],["48 hrs","buyer protection"],["20","subscriptions at launch"]] }
+];
+
+const SKILLS = [
+  ["Idea validation","Testing ideas with real customers through surveys before building anything.",["squadup","counter"]],
+  ["Market research","Sizing a market and studying competitors with Five Forces, SWOT and TOWS.",["counter"]],
+  ["Business models","Pricing, commissions and break-even planning that make an idea pay for itself.",["squadup","counter","share-ban"]],
+  ["Pitching","Presenting a product to judges with a clear story and a live demo.",["squadup","counter"]],
+  ["UI/UX design","Designing app screens and the steps people take through them.",["share-ban","squadup"]],
+  ["Building the product","Turning the plan into a working app with the team.",["share-ban","counter","squadup"]]
+];
+
+const COURSES = [
+  ["Business Planning & Idea Generation","Market research, strategy and pitching"],
+  ["Artificial Intelligence","Language processing and machine learning"],
+  ["Software Testing & Reliability","Building software that works the way it should"],
+  ["Programming","Python and Java"]
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const byslug = Object.fromEntries(PROJECTS.map(p => [p.slug, p]));
+const chip = p => `<span class="chip ${p.status}">${p.status==="done"?"Completed":"Preparing launch"}</span>`;
+
+function card(p){
+  return `<a class="card" href="#p-${p.slug}">
+    <div class="txt"><div class="meta"><span class="label">${p.year}</span>${chip(p)}</div><h3>${esc(p.name)}</h3><p>${esc(p.blurb)}</p></div>
+    <span class="go">View project →</span>
+    <div class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+  </a>`;
+}
+
+const VIEWS = {
+  about(){
+    return `<section class="hero">
+      <div class="eyebrow"><span class="dot"></span><span class="label">Student · Limkokwing University, Phnom Penh</span></div>
+      <h1>Rin Monyrathanak</h1>
+      <p class="line">I notice everyday problems and turn them into <em>products people want to use.</em></p>
+      <div class="cta"><a class="btn primary" href="#projects">See my projects</a><a class="btn" href="#contact">Get in touch</a></div>
+    </section>
+    <dl class="now">
+      <dt class="label">Studying</dt><dd>Software Engineering with Multimedia</dd>
+      <dt class="label">Focus</dt><dd>Product ideas, market research, design and pitching</dd>
+      <dt class="label">Based in</dt><dd>Phnom Penh, Cambodia</dd>
+    </dl>
+    <div class="prose">
+      <p>Cafés in Phnom Penh still hand out paper stamp cards. Gamers can't find a good teammate when they need one. People buying Netflix or Spotify online get scammed and never see their money again. Each of those problems became one of my projects.</p>
+      <p>I'm a Software Engineering with Multimedia student at Limkokwing University, and I like owning an idea from start to finish. I ask real people what they need, work out a price that makes sense, design the screens, and then stand up and pitch it.</p>
+    </div>
+    <div class="sec-h"><h2>Projects</h2><a href="#projects">View all →</a></div>
+    <div class="plist">${PROJECTS.map(card).join("")}</div>`;
+  },
+  projects(){
+    return `<div class="page-h"><h1>Projects</h1><p class="sub">Ideas I've researched, designed and pitched.</p></div>
+      <div class="plist">${PROJECTS.map(card).join("")}</div>`;
+  },
+  skills(){
+    return `<div class="page-h"><h1>Skills</h1></div>
+      <div class="prose"><p>What I bring to a team, and where I've used it.</p></div>
+      <div class="sk-grid">${SKILLS.map(([n,d,used])=>`<div class="sk"><h3>${esc(n)}</h3><p>${esc(d)}</p><span class="used">Used in ${used.map(s=>`<a href="#p-${s}">${esc(byslug[s].name)}</a>`).join(", ")}</span></div>`).join("")}</div>`;
+  },
+  education(){
+    return `<div class="page-h"><h1>Education</h1></div>
+      <div class="tl"><div class="tl-item">
+        <h3>Bachelor of Software Engineering with Multimedia</h3>
+        <p class="where">Limkokwing University of Creative Technology · Phnom Penh, Cambodia</p>
+        <p class="label">In progress</p>
+      </div></div>
+      <div class="sec-h"><h2>Key courses</h2></div>
+      <div class="courses">${COURSES.map(([n,d])=>`<div class="course"><b>${esc(n)}</b><span>${esc(d)}</span></div>`).join("")}</div>`;
+  },
+  contact(){
+    return `<div class="page-h"><h1>Contact</h1></div>
+      <section class="contact">
+        <h2>Let's work together.</h2>
+        <p>I'm open to internships, part-time roles and student collaborations. Email is the best way to reach me.</p>
+        <div class="mail"><code id="mailtext">${EMAIL}</code><button class="btn" id="copy" type="button">Copy email</button><span class="toast" id="toast" aria-live="polite"></span></div>
+      </section>`;
+  }
+};
+
+function detail(p){
+  return `<a class="back" href="#projects">← All projects</a>
+    <div class="page-h"><div class="meta"><span class="label">${p.year}</span>${chip(p)}</div>
+      <h1>${esc(p.name)}</h1><p class="sub">${esc(p.blurb)}</p></div>
+    <div class="facts">${p.facts.map(([k,v])=>`<div><span class="label">${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>
+    <div class="prose"><p>${esc(p.body)}</p></div>
+    ${p.stats.length?`<div class="stats">${p.stats.map(([v,l])=>`<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>`:""}
+    ${p.points.length?`<ul class="points">${p.points.map(x=>`<li><span>${esc(x)}</span></li>`).join("")}</ul>`:""}
+    <div class="tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>`;
+}
+
+function route(){
+  const h = (location.hash || "#about").slice(1);
+  let html, active = h;
+  if (h.startsWith("p-") && byslug[h.slice(2)]) { html = detail(byslug[h.slice(2)]); active = "projects"; }
+  else if (VIEWS[h]) html = VIEWS[h]();
+  else { html = VIEWS.about(); active = "about"; }
+  $("#main").innerHTML = `<div class="view">${html}</div>`;
+  document.querySelectorAll(".nav a").forEach(a => { if (a.getAttribute("href")==="#"+active) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  $("#nav").classList.remove("open"); $("#menu").setAttribute("aria-expanded","false");
+  const copy = $("#copy");
+  if (copy) copy.addEventListener("click", async () => {
+    const t = $("#toast");
+    try { await navigator.clipboard.writeText(EMAIL); t.textContent = "Copied"; }
+    catch { const r = document.createRange(); r.selectNodeContents($("#mailtext")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); t.textContent = "Selected. Press Ctrl+C to copy"; }
+  });
+  if (location.hash) window.scrollTo({top:0});
+}
+
+if (LINKS.linkedin) { $("#li").href = LINKS.linkedin; $("#li").hidden = false; }
+
+
+$("#menu").addEventListener("click", () => {
+  const open = $("#nav").classList.toggle("open");
+  $("#menu").setAttribute("aria-expanded", String(open));
+});
+
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>
