@@ -137,14 +137,6 @@ main{padding-top:44px}
 .tl-item::before{content:"";position:absolute;left:-28px;top:5px;width:15px;height:15px;border-radius:4px;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
 .tl-item h3{font-size:1.08rem;font-weight:700}
 .tl-item .where{font-size:var(--s-sm);color:var(--muted)}
-.courses{display:grid;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
-.course{display:grid;gap:2px;padding:12px 14px;border-top:1px solid var(--line)}
-.course:first-child{border-top:0}
-.course b{font-weight:600;font-size:var(--s-sm)}
-.course span{font-size:var(--s-xs);color:var(--muted)}
-.course .c-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.course .cr{white-space:nowrap}
-.course .code{font-variant-numeric:tabular-nums;letter-spacing:.02em}
 
 /* contact */
 .contact{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
@@ -221,15 +213,6 @@ const SKILLS = [
   ["Building the product","Turning the plan into a working app with the team.",["share-ban","counter","squadup"]]
 ];
 
-/* Year 3, Semester 2 modules: [code, name, credits, description] */
-const COURSES = [
-  ["BIE3274","Major Project 2",4,"Built SquadUp, a marketplace for gamers"],
-  ["BBE3122","Business Planning & Idea Generation",3,"Market research, strategy and pitching"],
-  ["BSE1111","Artificial Intelligence",3,"How machines search, reason and understand language"],
-  ["BSE1131","Machine Learning",3,"Training models that learn from data"],
-  ["BIE3453","Software Testing & Reliability",3,"Building software that works the way it should"]
-];
-
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const byslug = Object.fromEntries(PROJECTS.map(p => [p.slug, p]));
@@ -286,9 +269,7 @@ const VIEWS = {
       <div class="stats">
         <div class="stat"><b>3.28</b><span>CGPA out of 4.0</span></div>
         <div class="stat"><b>3.61</b><span>GPA, latest semester</span></div>
-      </div>
-      <div class="sec-h"><h2>Year 3, Semester 2 modules</h2></div>
-      <div class="courses">${COURSES.map(([c,n,cr,d])=>`<div class="course"><div class="c-top"><b>${esc(n)}</b><span class="cr">${cr} credits</span></div><span><span class="code">${esc(c)}</span> · ${esc(d)}</span></div>`).join("")}</div>`;
+      </div>`;
   },
   contact(){
     return `<div class="page-h"><h1>Contact</h1></div>
